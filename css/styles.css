@@ -69,20 +69,6 @@ body {
   color: #f0b24d;
 }
 
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.menu-toggle span {
-  background-color: #fff;
-  width: 25px;
-  height: 3px;
-  border-radius: 2px;
-}
-
 /* ===========================
    HERO SECTION
 =========================== */
@@ -1017,4 +1003,8 @@ body {
   background: rgba(0, 0, 0, 0.95);
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar {
+  transition: all 0.4s ease;
 }
