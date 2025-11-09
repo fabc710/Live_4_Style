@@ -960,3 +960,149 @@ body {
   transform: rotate(-45deg) translate(5px, -5px);
   background: #fff; /* mantiene blanco */
 }
+
+/* ===========================
+   HEADER / NAVBAR (corregido)
+=========================== */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #f0b24d;
+}
+
+/* ===========================
+   MENÚ HAMBURGUESA
+=========================== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff; /* Blanco visible sobre fondo oscuro */
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Animación al abrir */
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===========================
+   MENÚ RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    width: 220px;
+    border-left: 2px solid #f0b24d;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .navbar.active {
+    transform: translateX(0);
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 20px;
+  }
+
+  .navbar a {
+    font-size: 1.1rem;
+  }
+}
+
+/* ===========================
+   MENÚ HAMBURGUESA - COLORES DINÁMICOS
+=========================== */
+
+/* Por defecto (oscuro) */
+body.tema-oscuro .menu-toggle span {
+  background: #fff; /* Blanco sobre fondo oscuro */
+}
+
+/* Cuando el fondo es claro */
+body.tema-claro .menu-toggle span {
+  background: #000; /* Negro sobre fondo claro */
+}
+
+/* Animación al abrir (mantiene el color según el tema) */
+body.tema-oscuro .menu-toggle.active span:nth-child(1),
+body.tema-oscuro .menu-toggle.active span:nth-child(3),
+body.tema-claro .menu-toggle.active span:nth-child(1),
+body.tema-claro .menu-toggle.active span:nth-child(3) {
+  background: inherit;
+}
