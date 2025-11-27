@@ -4,22 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live 4 Style | Inicio</title>
+
   <link rel="icon" href="./img/icono.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./css/styles.css" />
 
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0a74da">
-<!-- Android Chrome recommended -->
-<meta name="mobile-web-app-capable" content="yes">
-<!-- iOS (parcial) -->
-<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- Manifest CORRECTO para GitHub Pages -->
+  <link rel="manifest" href="/Live_4_Style/manifest.json">
 
+  <meta name="theme-color" content="#0a74da">
 
+  <!-- iOS -->
+  <link rel="apple-touch-icon" href="/Live_4_Style/icons/icon-152x152.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 
 <body>
+
   <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="logo">
@@ -46,10 +47,10 @@
     </nav>
   </header>
 
-  <!-- ===== HERO / PORTADA ===== -->
+  <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="overlay">
-      <h2>Lleva tu estilo a otro Diego</h2>
+      <h2>Lleva tu estilo a otro Diego     V2</h2>
       <p>Relojes, accesorios y estilo para cada ocasión.</p>
       <a href="productos.html" class="boton1">Ver Catálogo</a>
     </div>
@@ -83,6 +84,7 @@
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
       <p>&copy; 2025 Live 4 Style. Todos los derechos reservados.</p>
     </div>
@@ -92,20 +94,8 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      const reg = await navigator.serviceWorker.register('/sw.js');
+      const reg = await navigator.serviceWorker.register('./sw.js'); // ← Importante para GitHub
       console.log('Service worker registrado:', reg.scope);
-
-      // Opcional: escucha actualización SW para notificar al usuario
-      reg.addEventListener('updatefound', () => {
-        const newSW = reg.installing;
-        newSW.addEventListener('statechange', () => {
-          if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-            // Nuevo SW instalado — puedes avisar al usuario para recargar
-            console.log('Nueva versión disponible');
-          }
-        });
-      });
-
     } catch (err) {
       console.error('Registro SW falló:', err);
     }
@@ -113,8 +103,6 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-
-  <!-- ===== ARCHIVO JS ===== -->
-  <script src="./js/main.js"></script>
+<script src="./js/main.js"></script>
 </body>
 </html>

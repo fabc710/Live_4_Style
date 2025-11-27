@@ -1,54 +1,62 @@
-const CACHE_NAME = 'miapp-cache-v1';
-const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+const CACHE_NAME = "live4style-cache-v1";
+const FILES_TO_CACHE = [
+  "/",
+  "/index.html",
+  "/productos.html",
+  "/sobre-nosotros.html",
+  "/sucursales.html",
+  "/contacto.html",
+  "/css/styles.css",
+  "/js/main.js",
+  "/img/logo.jpg",
+  "/img/icono.ico"
 ];
 
-self.addEventListener('install', event => {
+// INSTALAR SW Y CACHEAR ARCHIVOS
+self.addEventListener("install", (event) => {
+  console.log("Service Worker: Instalando...");
+
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE_URLS))
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Service Worker: Cacheando archivos");
+      return cache.addAll(FILES_TO_CACHE);
+    })
   );
+
   self.skipWaiting();
 });
 
-self.addEventListener('activate', event => {
+// ACTIVAR SW Y LIMPIAR CACHES ANTIGUAS
+self.addEventListener("activate", (event) => {
+  console.log("Service Worker: Activado");
+
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.map(key => {
-        if (key !== CACHE_NAME) return caches.delete(key);
-      }))
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
     )
   );
+
   self.clients.claim();
 });
 
-// Fetch: cache-first for precached assets; network-fallback otherwise
-self.addEventListener('fetch', event => {
-  const req = event.request;
-  // Optional: ignore non-GET, or external domains
-  if (req.method !== 'GET') return;
-
+// INTERCEPTAR PETICIONES
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(req).then(cachedRes => {
-      if (cachedRes) return cachedRes;
-      return fetch(req).then(networkRes => {
-        // Optionally cache runtime requests
-        return caches.open(CACHE_NAME).then(cache => {
-          // Avoid caching opaque responses unnecessarily
-          if (networkRes && networkRes.type === 'basic') {
-            cache.put(req, networkRes.clone());
-          }
-          return networkRes;
-        });
-      }).catch(() => {
-        // Fallback page if needed
-        if (req.mode === 'navigate') return caches.match('/offline.html');
-      });
+    caches.match(event.request).then((cachedResponse) => {
+      // Si existe en cache → lo devuelve
+      if (cachedResponse) return cachedResponse;
+
+      // Sino lo pide a la red
+      return fetch(event.request).catch(() =>
+        // Si falla (offline), devuelve el index o una página fallback
+        caches.match("/index.html")
+      );
     })
   );
 });
