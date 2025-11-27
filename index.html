@@ -6,6 +6,17 @@
   <title>Live 4 Style | Inicio</title>
   <link rel="icon" href="./img/icono.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./css/styles.css" />
+
+  <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0a74da">
+<!-- Android Chrome recommended -->
+<meta name="mobile-web-app-capable" content="yes">
+<!-- iOS (parcial) -->
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+
 </head>
 
 <body>
@@ -38,7 +49,7 @@
   <!-- ===== HERO / PORTADA ===== -->
   <section class="hero">
     <div class="overlay">
-      <h2>Lleva tu estilo a otro nivel</h2>
+      <h2>Lleva tu estilo a otro niveeeeeeeeeeeeeeeeeeeeeel</h2>
       <p>Relojes, accesorios y estilo para cada ocasión.</p>
       <a href="productos.html" class="boton1">Ver Catálogo</a>
     </div>
@@ -76,6 +87,32 @@
       <p>&copy; 2025 Live 4 Style. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const reg = await navigator.serviceWorker.register('/sw.js');
+      console.log('Service worker registrado:', reg.scope);
+
+      // Opcional: escucha actualización SW para notificar al usuario
+      reg.addEventListener('updatefound', () => {
+        const newSW = reg.installing;
+        newSW.addEventListener('statechange', () => {
+          if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+            // Nuevo SW instalado — puedes avisar al usuario para recargar
+            console.log('Nueva versión disponible');
+          }
+        });
+      });
+
+    } catch (err) {
+      console.error('Registro SW falló:', err);
+    }
+  });
+}
+</script>
+
 
   <!-- ===== ARCHIVO JS ===== -->
   <script src="./js/main.js"></script>
