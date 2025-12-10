@@ -7,6 +7,8 @@
   <link rel="icon" href="./img/icono.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./css/styles.css" />
   <link rel="stylesheet" href="./css/responsive.css" />
+  <!-- Estilos del modal (nuevo) -->
+  <link rel="stylesheet" href="./css/modal-order.css" />
 </head>
 
 <body>
@@ -17,7 +19,7 @@
       <h1>LIVE4STYLE</h1>
     </div>
 
-        <!-- Botón menú hamburguesa -->
+    <!-- Botón menú hamburguesa -->
     <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </div>
@@ -33,7 +35,6 @@
       <div class="menu-toggle" id="menu-toggle">
         <span></span><span></span><span></span>
       </div>
-
     </nav>
   </header>
 
@@ -51,7 +52,7 @@
           <img src="./img/producto1.jpeg" alt="Reloj GFORCE">
           <h3>GFORCE</h3>
           <p class="precio">$80.000</p>
-          <a href="contacto.html" class="boton2">Lo quiero</a>
+          <button class="btn-pedir">Pedir Contra Entrega</button>
         </article>
 
         <!-- PRODUCTO 2 -->
@@ -59,7 +60,7 @@
           <img src="./img/product2.jpeg" alt="Reloj QYQ">
           <h3>QYQ</h3>
           <p class="precio">$100.000</p>
-          <a href="contacto.html" class="boton2">Lo quiero</a>
+          <button class="btn-pedir">Pedir Contra Entrega</button>
         </article>
 
         <!-- PRODUCTO 3 -->
@@ -67,7 +68,7 @@
           <img src="./img/producto3.jpeg" alt="Reloj CURREN">
           <h3>CURREN</h3>
           <p class="precio">$75.000</p>
-          <a href="contacto.html" class="boton2">Lo quiero</a>
+          <button class="btn-pedir">Pedir Contra Entrega</button>
         </article>
 
         <!-- PRODUCTO 4 -->
@@ -75,7 +76,7 @@
           <img src="./img/producto4.jpg" alt="Reloj CASIO">
           <h3>CASIO Classic</h3>
           <p class="precio">$120.000</p>
-          <a href="contacto.html" class="boton2">Lo quiero</a>
+          <button class="btn-pedir">Pedir Contra Entrega</button>
         </article>
 
         <!-- PRODUCTO 5 -->
@@ -83,7 +84,7 @@
           <img src="./img/producto5.jpg" alt="Reloj NAVIFORCE">
           <h3>NAVIFORCE</h3>
           <p class="precio">$95.000</p>
-          <a href="contacto.html" class="boton2">Lo quiero</a>
+          <button class="btn-pedir">Pedir Contra Entrega</button>
         </article>
 
         <!-- PRODUCTO 6 -->
@@ -91,11 +92,58 @@
           <img src="./img/producto6.jpg" alt="Reloj LIGE">
           <h3>LIGE Sport</h3>
           <p class="precio">$110.000</p>
-          <a href="contacto.html" class="boton2">Lo quiero</a>
+          <button class="btn-pedir">Pedir Contra Entrega</button>
         </article>
       </div>
     </section>
   </main>
+
+  <!-- ========== MODAL FORMULARIO ========== -->
+  <div id="order-modal" class="order-modal" aria-hidden="true">
+    <div class="order-modal-backdrop" id="order-modal-backdrop"></div>
+    <div class="order-modal-panel" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+      <button class="order-modal-close" id="order-modal-close" aria-label="Cerrar">×</button>
+      <h2 id="order-modal-title">Pedir Contra entrega</h2>
+
+      <form id="order-form" class="order-form" novalidate>
+        <div class="form-row">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="apellido">Apellido</label>
+          <input id="apellido" name="apellido" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" name="telefono" type="tel" pattern="[\d +()-]{6,}" required />
+        </div>
+
+        <div class="form-row">
+          <label for="departamento">Departamento</label>
+          <input id="departamento" name="departamento" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="ciudad">Ciudad</label>
+          <input id="ciudad" name="ciudad" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="direccion">Dirección completa</label>
+          <input id="direccion" name="direccion" type="text" required placeholder="Ej: Calle 58 # 22 - 33" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submit-order" class="btn-submit">Pedir Contra entrega</button>
+        </div>
+
+        <div id="order-form-msg" class="order-form-msg" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
@@ -128,7 +176,10 @@
     </div>
   </footer>
 
-  <!-- ===== ARCHIVO JS ===== -->
+  <!-- ===== SCRIPTS ===== -->
+  <!-- script del modal (nuevo) -->
+  <script src="./js/order-modal.js"></script>
+  <!-- script principal existente -->
   <script src="./js/main.js"></script>
 </body>
 </html>
